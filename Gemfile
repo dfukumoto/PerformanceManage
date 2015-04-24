@@ -6,6 +6,8 @@ gem 'rails', '4.0.5'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+gem 'bootstrap-sass'
+
 group :development do
   gem 'rails-erd'
 end
