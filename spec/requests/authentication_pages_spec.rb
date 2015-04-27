@@ -4,6 +4,11 @@ RSpec.describe "AuthenticationPages", type: :request do
   describe "GET /authentication_pages" do
     subject{ page }
 
+    describe "incorrect access" do
+      before { visit user_path }
+      it { should have_content("サインイン") }
+    end
+
     describe "signin page" do
       before { visit signin_path }
 
