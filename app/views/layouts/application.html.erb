@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PerformanceManage</title>
+  <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<% if signed_in? %>
+  <li><%= link_to "サインアウト", signout_path, method: "delete" %></li>
+  <% unless current_user.partner? %>
+    <%= link_to 'プロジェクト', '#' %>
+  <% end %>
+<% else %>
+  <li><%= link_to "サインイン", signin_path %></li>
+<% end %>
 <%= yield %>
 
 </body>
