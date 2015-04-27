@@ -1,0 +1,12 @@
+<% provide(:title, "サインイン") %>
+<h1>サインイン</h1>
+
+<%= form_for(:session, url: sessions_path) do |f| %>
+  <%= f.label 'ユーザID' %>
+  <%= f.text_field :email %>
+
+  <%= f.label 'パスワード' %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "サインイン" %>
+<% end %>
