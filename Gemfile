@@ -9,13 +9,11 @@ gem 'pg'
 gem 'bootstrap-sass'
 gem 'sprockets'
 
-group :development do
+group :development, :test do
   gem 'rails-erd'
-end
-
-group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
+  gem 'rspec-rails'
 end
 
 # Use SCSS for stylesheets
