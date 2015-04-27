@@ -9,6 +9,9 @@
 <body>
 <% if signed_in? %>
   <li><%= link_to "サインアウト", signout_path, method: "delete" %></li>
+  <% unless current_user.partner? %>
+    <%= link_to 'プロジェクト', '#' %>
+  <% end %>
 <% else %>
   <li><%= link_to "サインイン", signin_path %></li>
 <% end %>
