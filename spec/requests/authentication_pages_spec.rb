@@ -18,7 +18,6 @@ RSpec.describe "AuthenticationPages", type: :request do
         before { click_button "サインイン" }
 
         it { should have_title("サインイン") }
-        it { should have_selector('div.alert.alert-error', text: 'Invalid') }
       end
     end
   end

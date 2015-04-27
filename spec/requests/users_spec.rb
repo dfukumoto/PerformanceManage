@@ -5,7 +5,8 @@ RSpec.describe "Users", type: :request do
     @user = User.new( name: "Example User",
                       email: "user@example.com",
                       password: "foobar",
-                      password_confirmation: "foobar")
+                      password_confirmation: "foobar",
+                      authority: 1)
   end
   subject { @user }
 
@@ -14,6 +15,10 @@ RSpec.describe "Users", type: :request do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:admin?) }
+  it { should respond_to(:staff?) }
+  it { should respond_to(:partner?) }
+
 
   it { should be_valid }
 
@@ -66,5 +71,26 @@ RSpec.describe "Users", type: :request do
       user_same.save
     end
     it { should_not be_valid }
+  end
+
+  describe "Check Authrority" do
+    describe "admin?" do
+      before do
+        @user.authority = 1
+      end
+      it { should be_admin }
+    end
+    describe "staff?" do
+      before do
+        @user.authority = 2
+      end
+      it { should be_staff }
+    end
+    describe "partner?" do
+      before do
+        @user.authority = 3
+      end
+      it { should be_partner }
+    end
   end
 end
