@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def staff?
-    self.authority.to_i == 2 ? true : fales
+    self.authority.to_i == 2 ? true : false
   end
 
   def partner?
