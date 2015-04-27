@@ -8,12 +8,18 @@ gem 'pg'
 
 gem 'bootstrap-sass'
 gem 'sprockets'
+gem 'bcrypt-ruby'
 
 group :development, :test do
   gem 'rails-erd'
   gem 'selenium-webdriver'
   gem 'capybara'
   gem 'rspec-rails'
+
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
 end
 
 # Use SCSS for stylesheets
