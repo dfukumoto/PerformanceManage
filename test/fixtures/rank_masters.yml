@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rank: MyString
+  cost: 1
+  start_date: 2015-04-24
+  end_date: 2015-04-24
+
+two:
+  rank: MyString
+  cost: 1
+  start_date: 2015-04-24
+  end_date: 2015-04-24

@@ -19,8 +19,8 @@ development:
   encoding: unicode
   database: PerformanceManage_development
   pool: 5
-  username: PerformanceManage
-  password:
+  username: performancemanage
+  password: 'Horn5728!!'
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -48,13 +48,13 @@ test:
   encoding: unicode
   database: PerformanceManage_test
   pool: 5
-  username: PerformanceManage
-  password:
+  username: performancemanage
+  password: 'Horn5728!!'
 
 production:
   adapter: postgresql
   encoding: unicode
   database: PerformanceManage_production
   pool: 5
-  username: PerformanceManage
-  password:
+  username: performancemanage
+  password: 'Horn5728!!'
