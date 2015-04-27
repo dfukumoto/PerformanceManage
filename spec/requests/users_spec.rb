@@ -2,13 +2,18 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
   before do
-    @user = User.new(name: "Example User", email: "user@example.com")
+    @user = User.new( name: "Example User",
+                      email: "user@example.com",
+                      password: "foobar",
+                      password_confirmation: "foobar")
   end
   subject { @user }
 
   it { should respond_to(:name) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
+  it { should respond_to(:password) }
+  it { should respond_to(:password_confirmation) }
 
   it { should be_valid }
 
@@ -19,6 +24,17 @@ RSpec.describe "Users", type: :request do
   end
   describe "when email is not presence" do
     before { @user.email = " " }
+    it { should_not be_valid }
+  end
+  describe "when password is not presence" do
+    before do
+      @user.password = " "
+      @user.password_confirmation = " "
+    end
+    it { should_not be_valid }
+  end
+  describe "when password doesnt match confirmation" do
+    before { @user.password_confirmation = "mismatch" }
     it { should_not be_valid }
   end
 

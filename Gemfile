@@ -22,6 +22,10 @@ group :development, :test do
   gem 'pry-stack_explorer'
 end
 
+group :test do
+  gem 'database_rewinder'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
