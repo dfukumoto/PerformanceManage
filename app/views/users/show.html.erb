@@ -1,2 +1,9 @@
 <h1>ユーザ名:<%= @user.name %></h1>
 <h1>ユーザID:<%= @user.email %></h1>
+<% if @user.admin? %>
+<h1>権限: 管理者</h1>
+<% elsif @user.staff? %>
+<h1>権限: 社員</h1>
+<% elsif @user.partner? %>
+<h1>権限: パートナー</h1>
+<% end %>
