@@ -1,0 +1,20 @@
+<% provide(:title, "新規登録") %>
+<h1>ユーザ新規作成</h1>
+<%= form_for(@user, :url => { :controller => :users, :action => :create }) do |f| %>
+  <%= f.label "ユーザ名" %>
+  <%= f.text_field :name %>
+
+  <%= f.label "ユーザID" %>
+  <%= f.text_field :email %>
+
+  <%= f.label "権限" %>
+  <%= f.select :authority, {"管理者"=>1, "社員"=>2, "パートナー"=>3} %>
+
+  <%= f.label "パスワード" %>
+  <%= f.password_field :password %>
+
+  <%= f.label "パスワード(確認)" %>
+  <%= f.password_field :password_confirmation %>
+
+  <%= f.submit "新規作成" %>
+<% end %>

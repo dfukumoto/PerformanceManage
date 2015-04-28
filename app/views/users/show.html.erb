@@ -7,3 +7,7 @@
 <% elsif @user.partner? %>
 <h1>権限: パートナー</h1>
 <% end %>
+
+<% flash.each do |key, value|  %>
+  <div><%= value %></div>
+<% end %>
