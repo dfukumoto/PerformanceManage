@@ -1,7 +1,6 @@
 class PerformancesController < ApplicationController
 
   def create
-    binding.pry
     @performance_form = PerformanceForm.new(performance_params)
     if @performance_form.save
       flash[:success] = "稼働実績の登録に成功しました．"

@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150428021036) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.text     "content"
-    t.boolean  "permission", default: false
+    t.boolean  "permission", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

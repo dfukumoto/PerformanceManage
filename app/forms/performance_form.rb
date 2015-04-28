@@ -7,7 +7,7 @@ class PerformanceForm
     {
         start_time: performance_start_datetime,
           end_time: performance_end_datetime,
-        permission: @permission,
+        permission: (@permission || false),
            content: @content
     }
   end
@@ -21,7 +21,6 @@ class PerformanceForm
   end
 
   def save
-    binding.pry
     @performance = Performance.new(performance_attributes)
     if @performance.save
       true
