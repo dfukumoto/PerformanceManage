@@ -12,6 +12,9 @@
   <% unless current_user.partner? %>
     <%= link_to 'プロジェクト', '#' %>
   <% end %>
+  <% if current_user.admin? %>
+    <%= link_to 'ユーザ新規作成', new_user_path %>
+  <% end %>
 <% else %>
   <li><%= link_to "サインイン", signin_path %></li>
 <% end %>
