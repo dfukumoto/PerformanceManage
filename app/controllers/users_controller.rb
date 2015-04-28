@@ -4,6 +4,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(remember_token: User.encrypt(cookies[:remember_token]))
+    @date = Performance.create_date
+    @time = Performance.create_time
+    @performance_form = PerformanceForm.new
   end
 
   def new
