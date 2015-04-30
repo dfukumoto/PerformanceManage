@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Enumerize
+
   before_save { self.email = email.downcase }
   before_create :create_remember_token
 
@@ -13,6 +15,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :authority, presence: true
 
+  enumerize :authority, in: {"管理者" => 1, "社員" => 2, "パートナー" => 3}, scope: :having_status
+
   has_secure_password
 
   def User.new_remember_token
@@ -24,15 +28,15 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.authority.to_i == 1 ? true : false
+    self.authority.value.to_i == 1 ? true : false
   end
 
   def staff?
-    self.authority.to_i == 2 ? true : false
+    self.authority.value.to_i == 2 ? true : false
   end
 
   def partner?
-    self.authority.to_i == 3 ? true : false
+    self.authority.value.to_i == 3 ? true : false
   end
 
   def assign_projects
