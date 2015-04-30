@@ -25,7 +25,7 @@ class Performance < ActiveRecord::Base
   end
 
   def end_time_check
-    if self.end_time >= self.start_time
+    if self.end_time <= self.start_time
       errors.add(:end_time, "日付を正しく入力してください．")
     end
   end
