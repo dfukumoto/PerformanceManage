@@ -1,5 +1,5 @@
 class PerformancesController < ApplicationController
-  before_action :admin_only!, only: [:index_unapprove, :show, :approve]
+  before_action :admin_only!, only: [:unapprove, :show, :approve]
 
 
   def unapprove
