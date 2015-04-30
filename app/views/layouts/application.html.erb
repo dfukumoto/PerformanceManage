@@ -26,6 +26,11 @@
   <h1>権限: パートナー</h1>
   <% end %>
 
+  <% flash.each do |key, value|  %>
+    <div><%= value %></div>
+  <% end %>
+
+
 <% else %>
   <li><%= link_to "サインイン", signin_path %></li>
 <% end %>
