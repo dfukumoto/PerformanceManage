@@ -1,12 +1,21 @@
 PerformanceManage::Application.routes.draw do
-  resource :user
-  resources :performances
-  resources :sessions, only: [ :new, :create, :destroy ]
   root "users#show"
+
+  resource :user
+  resources :performances do
+    collection do
+      get :unapprove, action: :unapprove
+    end
+    member do
+      patch :approve, action: :approve
+    end
+  end
+  resources :sessions, only: [ :new, :create, :destroy ]
   match '/signin',  to: 'sessions#new',     via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/signup',  to: 'users#new',        via: 'get'
-  match '/unprove_performances',  to: 'performances#index_unapprove', via: 'get'
+#  match '/unprove_performances',  to: 'performances#index_unapprove', via: 'get'
+  # match '/approve/:id',  to: 'performances#approve', via: 'patch'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
