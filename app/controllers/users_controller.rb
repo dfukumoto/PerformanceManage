@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザの新規作成に成功しました．"
       redirect_to user_path
     else
+      flash[:error] = "ユーザの新規作成に失敗しました．"
       render "new"
     end
   end
