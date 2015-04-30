@@ -8,8 +8,9 @@ class Performance < ActiveRecord::Base
 
 
 
+
   def self.create_date
-    date_array = (Date.today.prev_month..Date.today).to_a
+    date_array = (Date.today.prev_month..Date.today).to_a.reverse!
     date_array.map!{|date| date.to_s }
   end
 
