@@ -42,6 +42,7 @@ class PerformancesController < ApplicationController
                                           :end_date,
                                           :end_time,
                                           :content,
-                                          :permission)
+                                          :permission,
+                                          :project_id)
     end
 end

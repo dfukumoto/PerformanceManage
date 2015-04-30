@@ -1,7 +1,7 @@
 class PerformanceForm
   include ActiveModel::Model
 
-  attr_accessor :start_date, :start_time, :end_date, :end_time, :permission, :content, :user_id
+  attr_accessor :start_date, :start_time, :end_date, :end_time, :permission, :content, :user_id, :project_id
 
   def performance_attributes
     {
@@ -9,7 +9,8 @@ class PerformanceForm
           end_time: performance_end_datetime,
         permission: (@permission || false),
            content: @content,
-           user_id: @user_id
+           user_id: @user_id,
+        project_id: @project_id
     }
   end
 
