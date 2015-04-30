@@ -1,7 +1,19 @@
 class PerformancesController < ApplicationController
 
+  def index_unapprove
+    @performances = Performance.where(permission: false)
+  end
+
+  def show
+    @performance = Performance.find(params[:id])
+  end
+
+  def approve
+
+  end
+
   def create
-    @performance_form = PerformanceForm.new(performance_params)
+    @performance_form = PerformanceForm.new(performance_params.merge(user_id: current_user.id))
     if @performance_form.save
       flash[:success] = "稼働実績の登録に成功しました．"
     else
@@ -22,5 +34,6 @@ class PerformancesController < ApplicationController
                                           :end_time,
                                           :content,
                                           :permission)
+
     end
 end
