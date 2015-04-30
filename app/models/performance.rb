@@ -5,9 +5,7 @@ class Performance < ActiveRecord::Base
   validates :start_time,  presence: true
   validates :end_time,    presence: true
   validates :content,     presence: true
-
-
-
+  validate  :end_time_check
 
   def self.create_date
     date_array = (Date.today.prev_month..Date.today).to_a.reverse!
@@ -24,5 +22,11 @@ class Performance < ActiveRecord::Base
       time += 30.minutes
     end
     return_array.map!{|time| time.strftime("%H:%M").to_s}
+  end
+
+  def end_time_check
+    if self.end_time >= self.start_time
+      errors.add(:end_time, "日付を正しく入力してください．")
+    end
   end
 end
