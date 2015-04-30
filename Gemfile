@@ -9,6 +9,7 @@ gem 'pg'
 gem 'bootstrap-sass'
 gem 'sprockets'
 gem 'bcrypt-ruby'
+gem 'enumerize'
 
 group :development, :test do
   gem 'rails-erd'
