@@ -1,5 +1,6 @@
 <%= form_for(@performance_form, :url => { :controller => :performances, :action => :create }) do |f| %>
   <%= f.label "プロジェクト" %>
+  <%= f.select :project_id, @projects.map{|p| [p.name, p.id]} %>
 
   <%= f.label "開始日時" %>
   <%= f.select :start_date, @date %>

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @date = Performance.create_date
     @time = Performance.create_time
     @performance_form = PerformanceForm.new
+    @projects = @user.projects
   end
 
   def new
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザの新規作成に成功しました．"
       redirect_to user_path
     else
+      flash[:error] = "ユーザの新規作成に失敗しました．"
       render "new"
     end
   end
@@ -28,10 +30,5 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :authority)
     end
 
-    def admin_only!
-      unless current_user.admin?
-        flash[:error] = "管理者のみアクセスできます．"
-        redirect_to user_path
-      end
-    end
+
 end

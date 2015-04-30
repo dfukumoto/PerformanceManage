@@ -29,4 +29,11 @@ module SessionsHelper
       redirect_to signin_path
     end
   end
+
+  def admin_only!
+    unless current_user.admin?
+      flash[:error] = "管理者のみアクセスできます．"
+      redirect_to user_path
+    end
+  end
 end

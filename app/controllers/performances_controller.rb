@@ -1,7 +1,28 @@
 class PerformancesController < ApplicationController
+  before_action :admin_only!, only: [:index_unapprove, :show, :approve]
+
+
+  def unapprove
+    @performances = Performance.where(permission: false)
+  end
+
+  def show
+    @performance = Performance.find(params[:id])
+  end
+
+  def approve
+    @performance = Performance.find(params[:id])
+    if @performance.update(permission: true)
+      flash[:success] = "承認しました．"
+      redirect_to unapprove_performances_path
+    else
+      flash[:error] = "承認に失敗しました．"
+      redirect_to unapprove_performances_path
+    end
+  end
 
   def create
-    @performance_form = PerformanceForm.new(performance_params)
+    @performance_form = PerformanceForm.new(performance_params.merge(user_id: current_user.id))
     if @performance_form.save
       flash[:success] = "稼働実績の登録に成功しました．"
     else
@@ -21,6 +42,7 @@ class PerformancesController < ApplicationController
                                           :end_date,
                                           :end_time,
                                           :content,
-                                          :permission)
+                                          :permission,
+                                          :project_id)
     end
 end
