@@ -1,7 +1,7 @@
 <h1>未承認稼働実績一覧</h1>
 <% @performances.each do |performance| %>
   <li>
-    ユーザ名: <%= performance.user.name %>    作業時間: <%= performance.start_time %> ~ <%= performance.end_time %>
+    ユーザ名: <%= performance.user.name %>    プロジェクト名:<%= performance.project.name %>    作業時間: <%= performance.start_time %> ~ <%= performance.end_time %>
     <%= link_to "詳細", performance_path(performance) %>
     <%= link_to "承認", approve_performance_path(performance), method: "patch" %>
   </li>
