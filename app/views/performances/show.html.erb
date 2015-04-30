@@ -3,6 +3,6 @@
 <li>ユーザ名: <%= @performance.user.name %></li>
 <li>プロジェクト名: <%= @performance.project.name %></li>
 <li>作業時間: <%= @performance.start_time %> ~ <%= @performance.end_time %></li>
-<li>作業内容: <%= @performance.content %></li>
+<li>作業内容: <%= sanitize(simple_format(@performance.content), :tags => %w(br p)) %></li>
 
 <%= link_to "承認", approve_performance_path(@performance), method: "patch" %>
