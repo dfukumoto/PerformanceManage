@@ -1,4 +1,6 @@
 class PerformancesController < ApplicationController
+  before_action :admin_only!, only: [:index_unapprove, :show]
+
 
   def index_unapprove
     @performances = Performance.where(permission: false)
@@ -34,6 +36,5 @@ class PerformancesController < ApplicationController
                                           :end_time,
                                           :content,
                                           :permission)
-
     end
 end
