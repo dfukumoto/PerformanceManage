@@ -1,14 +1,14 @@
-<%= form_for(@performance_form, :url => { :controller => :performances, :action => :create }) do |f| %>
+<%= form_for(PerformanceForm.new, :url => { :controller => :performances, :action => :create }) do |f| %>
   <%= f.label "プロジェクト" %>
-  <%= f.select :project_id, @projects.map{|p| [p.name, p.id]} %>
+  <%= f.select :project_id, @user.projects.map{|p| [p.name, p.id]} %>
 
   <%= f.label "開始日時" %>
-  <%= f.select :start_date, @date %>
-  <%= f.select :start_time, @time %>
+  <%= f.select :start_date, create_date %>
+  <%= f.select :start_time, create_time %>
 
   <%= f.label "終了日時" %>
-  <%= f.select :end_date, @date %>
-  <%= f.select :end_time, @time%>
+  <%= f.select :end_date, create_date %>
+  <%= f.select :end_time, create_time %>
 
   <%= f.label "作業内容" %>
   <%= f.text_area :content %>

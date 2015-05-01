@@ -4,10 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(remember_token: User.encrypt(cookies[:remember_token]))
-    @date = Performance.create_date
-    @time = Performance.create_time
     @performance_form = PerformanceForm.new
-    @projects = @user.projects
   end
 
   def new
@@ -20,7 +17,7 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザの新規作成に成功しました．"
       redirect_to user_path
     else
-      flash[:error] = "ユーザの新規作成に失敗しました．"
+      flash.now[:error] = "ユーザの新規作成に失敗しました．"
       render "new"
     end
   end
