@@ -80,4 +80,13 @@ RSpec.describe "Performances", type: :request do
     end
   end
 
+  describe "change permission" do
+    before do
+      @before_permission = @performance.permission
+      @performance.permission = !@before_permission
+    end
+    it { expect(@performance.permission).not_to eq @before_permission }
+    it { expect(@performance.permission).to eq !@before_permission }
+  end
+
 end
