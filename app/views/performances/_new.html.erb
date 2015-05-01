@@ -4,12 +4,12 @@
 
   <%= f.label "開始日時" %>
   <%= f.select :start_date, create_date %>
-  <%= f.select :start_time, create_time %>
+  <%= f.select :start_time, create_time, :selected => "10:00" %>
+  <% binding.pry %>
 
   <%= f.label "終了日時" %>
   <%= f.select :end_date, create_date %>
-  <%= f.select :end_time, create_time %>
-
+  <%= f.select :end_time, create_time, :selected => "10:00" %>
   <%= f.label "作業内容" %>
   <%= f.text_area :content %>
 
