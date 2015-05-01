@@ -14,8 +14,8 @@
       <p>ユーザID:<%= current_user.email %></p>
       <p>権限: <%= current_user.authority %></p>
       <% if current_user.admin? %>
-        <li><%= link_to 'ユーザ新規作成', new_user_path %></li>
-        <li><%= link_to '未承認稼働実績一覧',  unapprove_performances_path %></li>
+        <p><%= link_to 'ユーザ新規作成', new_user_path, class: "btn btn-primary"%></p>
+        <p><%= link_to '未承認稼働実績一覧',  unapprove_performances_path, class: "btn btn-primary" %></p>
       <% end %>
       <% flash.each do |key, value|  %>
         <div class="alert alert-<%= key %>"><%= value %></div>
