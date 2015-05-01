@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 
     def admin_only!
       unless current_user.admin?
-        flash[:error] = "管理者のみアクセスできます．"
+        flash[:danger] = "管理者のみアクセスできます．"
         redirect_to user_path
       end
     end

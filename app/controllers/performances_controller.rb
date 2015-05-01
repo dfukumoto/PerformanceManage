@@ -17,7 +17,7 @@ class PerformancesController < ApplicationController
       flash[:success] = "承認しました．"
       redirect_to unapprove_performances_path
     else
-      flash.now[:error] = "承認に失敗しました．"
+      flash.now[:danger] = "承認に失敗しました．"
       redirect_to unapprove_performances_path
     end
   end
@@ -26,9 +26,9 @@ class PerformancesController < ApplicationController
     @user = User.find_by(remember_token: User.encrypt(cookies[:remember_token]))
     @performance_form = PerformanceForm.new(performance_params.merge(user_id: current_user.id))
     if @performance_form.save
-      redirect_to user_path, notice: "稼働実績の登録に成功しました．"
+      redirect_to user_path, :flash => { :success => "稼働実績の登録に成功しました．" }
     else
-      flash.now[:error] = "稼働実績の登録に失敗しました．"
+      flash.now[:danger] = "稼働実績の登録に失敗しました．"
       @projects = Project.all
       render template: 'users/show'
     end

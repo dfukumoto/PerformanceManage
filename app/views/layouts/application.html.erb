@@ -7,28 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <li><%= link_to "Home", user_path %></li>
-  <% if signed_in? %>
-    <li><%= link_to "サインアウト", signout_path, method: "delete" %></li>
-    <% unless current_user.partner? %>
-    <li><%= link_to 'プロジェクト', '#' %></li>
-  <% end %>
-  <% if current_user.admin? %>
-    <li><%= link_to 'ユーザ新規作成', new_user_path %></li>
-    <li><%= link_to '未承認稼働実績一覧',  unapprove_performances_path %></li>
-  <% end %>
-  <h1>ユーザ名:<%= current_user.name %></h1>
-  <h1>ユーザID:<%= current_user.email %></h1>
-  <h1>権限: <%= current_user.authority %></h1>
+  <%= render 'layouts/header' %>
+  <div class="container">
+    <% if signed_in? %>
+      <p>ユーザ名:<%= current_user.name %></p>
+      <p>ユーザID:<%= current_user.email %></p>
+      <p>権限: <%= current_user.authority %></p>
+      <% if current_user.admin? %>
+        <p><%= link_to 'ユーザ新規作成', new_user_path, class: "btn btn-primary"%></p>
+        <p><%= link_to '未承認稼働実績一覧',  unapprove_performances_path, class: "btn btn-primary" %></p>
+      <% end %>
+      <% flash.each do |key, value|  %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    <% end %>
 
-  <% flash.each do |key, value|  %>
-    <div><%= value %></div>
-  <% end %>
+    <hr>
 
-<% else %>
-  <li><%= link_to "サインイン", signin_path %></li>
-<% end %>
-<%= yield %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>

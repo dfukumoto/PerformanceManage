@@ -1,8 +1,24 @@
 <h1>未承認稼働実績一覧</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>ユーザ名</th><th>プロジェクト名</th><th>作業時間</th><th>    </th>
+  </tr>
 <% @performances.each do |performance| %>
-  <li>
-    ユーザ名: <%= performance.user.name %>    プロジェクト名:<%= performance.project.name %>    作業時間: <%= performance.start_time %> ~ <%= performance.end_time %>
-    <%= link_to "詳細", performance_path(performance) %>
-    <%= link_to "承認", approve_performance_path(performance), method: "patch" %>
-  </li>
+  <tr>
+    <td>
+      <%= performance.user.name %>
+    </td>
+    <td>
+      <%= performance.project.name %>
+    </td>
+    <td>
+      <%= performance.start_time %> ~ <%= performance.end_time %>
+    </td>
+    <td>
+      <%= link_to "詳細", performance_path(performance), class: "btn btn-info" %>
+      <%= link_to "承認", approve_performance_path(performance), method: "patch", class: "btn btn-primary" %>
+    </td>
+  </tr>
 <% end %>
+</table>
