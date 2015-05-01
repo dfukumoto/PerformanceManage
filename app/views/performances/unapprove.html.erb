@@ -16,8 +16,8 @@
       <%= performance.start_time %> ~ <%= performance.end_time %>
     </td>
     <td>
-      <%= link_to "詳細", performance_path(performance) %>
-      <%= link_to "承認", approve_performance_path(performance), method: "patch" %>
+      <%= link_to "詳細", performance_path(performance), class: "btn btn-info" %>
+      <%= link_to "承認", approve_performance_path(performance), method: "patch", class: "btn btn-primary" %>
     </td>
   </tr>
 <% end %>
