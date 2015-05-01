@@ -34,6 +34,8 @@ RSpec.describe "Performances", type: :request do
   it { should respond_to(:permission) }
   it { should respond_to(:user_id) }
   it { should respond_to(:project_id) }
+  it { should respond_to(:user) }
+  it { should respond_to(:project) }
 
   it { should be_valid }
 
@@ -66,4 +68,16 @@ RSpec.describe "Performances", type: :request do
     before { @performance.start_time = @performance.end_time }
     it { should_not be_valid }
   end
+
+  describe "user association" do
+    it "should have the right user" do
+      expect(@performance.user.name).to eq @user.name
+    end
+  end
+  describe "project association" do
+    it "should have the right project" do
+      expect(@performance.project.name).to eq @project.name
+    end
+  end
+
 end
