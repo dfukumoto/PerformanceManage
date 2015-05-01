@@ -76,7 +76,7 @@ RSpec.describe "AuthenticationPages", type: :request do
         it { should have_content(user.name) }
         it { should have_content(user.email) }
         it { should have_content("パートナー") }
-        it { should_not have_content("プロジェクト") }
+        it { should_not have_link("プロジェクト", href: "#") }
         it { should have_link("サインアウト", href: signout_path) }
       end
 

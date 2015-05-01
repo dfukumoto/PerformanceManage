@@ -5,9 +5,10 @@ class Performance < ActiveRecord::Base
   validates :start_time,  presence: true
   validates :end_time,    presence: true
   validates :content,     presence: true
-  validate  :end_time_check
+  validates :project_id,  presence: true
+  validates :user_id,     presence:true
 
-  
+  validate  :end_time_check
 
   def end_time_check
     if self.end_time <= self.start_time
