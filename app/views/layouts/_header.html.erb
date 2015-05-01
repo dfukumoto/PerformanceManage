@@ -1,0 +1,19 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "稼働実績管理", user_path %>
+      <nav>
+        <ul class="nav pull-right">
+          <% if signed_in? %>
+            <% unless current_user.partner? %>
+              <li><%= link_to "プロジェクト", "#" %></li>
+            <% end %>
+            <li><%= link_to "サインアウト", signout_path, method: "delete" %></li>
+          <% else %>
+            <li><%= link_to "サインイン", signin_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
