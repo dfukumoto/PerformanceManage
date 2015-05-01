@@ -24,10 +24,6 @@ class PerformanceForm
 
   def save
     @performance = Performance.new(performance_attributes)
-    if @performance.save
-      true
-    else
-      false
-    end
+    @performance.save
   end
 end
