@@ -26,6 +26,7 @@ end
 group :test do
   gem 'database_rewinder'
   gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 # Use SCSS for stylesheets
