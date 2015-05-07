@@ -5,8 +5,12 @@ FactoryGirl.define do
     password              "foobar"
     password_confirmation "foobar"
 
+
     factory :admin do
       authority 1
+      after(:create) {|admin|
+        create(:performance, user: admin, project: create(:project))
+      }
     end
 
     factory :staff do
@@ -18,11 +22,11 @@ FactoryGirl.define do
   end
 
   factory :performance do
-    project_id    1
-    user_id       1
+    project
+    user
     start_time    "2015/05/07 11:00:00"
     end_time      "2015/05/07 17:00:00"
-    content       "ExamplePerformance"
+    content       Faker::Lorem.sentence
   end
 
   factory :project do
