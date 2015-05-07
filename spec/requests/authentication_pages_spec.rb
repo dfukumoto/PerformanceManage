@@ -30,8 +30,26 @@ RSpec.describe "AuthenticationPages", type: :request do
       before { visit signin_path }
       describe "with invalid informatio" do
         before { click_button "サインイン" }
-
         it { should have_title("サインイン") }
+
+        describe "input user_id only" do
+          let!(:user) { FactoryGirl.create(:admin) }
+          before do
+            fill_in "session_email",    with: user.email
+            click_button "サインイン"
+          end
+          it { should have_content("サインイン") }
+          it { should have_title("サインイン") }
+        end
+        describe "input password only" do
+          let!(:user) { FactoryGirl.create(:admin) }
+          before do
+            fill_in "session_password", with: user.password
+            click_button "サインイン"
+          end
+          it { should have_content("サインイン") }
+          it { should have_title("サインイン") }
+        end
       end
       describe "with admin information" do
         let!(:user) {  FactoryGirl.create(:admin) }
