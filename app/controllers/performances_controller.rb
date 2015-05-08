@@ -3,7 +3,7 @@ class PerformancesController < ApplicationController
   before_action :admin_only!, only: [:unapprove, :approve]
 
   def index
-    @performances = Performance.where(user_id: current_user)
+    @performances = Performance.where(user_id: current_user).order(created_at: :desc)
   end
 
   def edit
@@ -25,7 +25,7 @@ class PerformancesController < ApplicationController
   end
 
   def unapprove
-    @performances = Performance.where(permission: false)
+    @performances = Performance.where(permission: false).order(created_at: :desc)
   end
 
   def show
