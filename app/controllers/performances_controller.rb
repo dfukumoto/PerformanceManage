@@ -8,7 +8,12 @@ class PerformancesController < ApplicationController
 
   def edit
     @performance = Performance.find(params[:id])
-    @performance_form = PerformanceForm.new.assign_performance_attributs(@performance)
+    if @performance.user == current_user
+      @performance_form = PerformanceForm.new.assign_performance_attributs(@performance)
+    else
+      flash[:danger] = "稼働実績作成者以外は変更できません"
+      redirect_to performances_path
+    end
   end
 
   def update
