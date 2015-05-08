@@ -2,6 +2,7 @@ class PerformancesController < ApplicationController
   before_action :signed_in?
   before_action :admin_only!, only: [:unapprove, :approve]
 
+
   def index
     @performances = Performance.where(user_id: current_user).order(created_at: :desc)
   end
@@ -70,7 +71,7 @@ class PerformancesController < ApplicationController
     redirect_to performances_path
   end
 
-  private
+private
     def performance_params
       params.require(:performance_form).permit(:start_date,
                                           :start_time,
