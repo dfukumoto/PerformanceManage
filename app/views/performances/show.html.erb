@@ -15,4 +15,6 @@
   </tr>
 </table>
 
-<%= link_to "承認", approve_performance_path(@performance), method: "patch", class: "btn btn-primary" %>
+<% if current_user.admin? %>
+  <%= link_to "承認", approve_performance_path(@performance), method: "patch", class: "btn btn-primary" %>
+<% end %>

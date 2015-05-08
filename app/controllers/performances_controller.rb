@@ -1,19 +1,21 @@
 class PerformancesController < ApplicationController
   before_action :signed_in?
-  before_action :admin_only!, only: [:unapprove, :show, :approve]
+  before_action :admin_only!, only: [:unapprove, :approve]
 
   def index
     @performances = Performance.where(user_id: current_user)
   end
 
   def edit
-    @user = User.find_by(remember_token: User.encrypt(cookies[:remember_token]))
     @performance = Performance.find(params[:id])
+    @performance_form = PerformanceForm.new.assign_performance_attributs(@performance)
   end
 
   def update
-    @performance_form = PerformanceForm.new(edit_performance_params.merge(id: params[:id], user_id: current_user.id))
-    if @performance_form.update
+    @performance_form = PerformanceForm.new(performance_params.merge(user_id: current_user.id))
+    @performance = Performance.find(params[:id])
+    @performance.assign_attributes(@performance_form.performance_attributes)
+    if @performance.save
       flash[:success] = "稼働実績の変更に成功しました．"
       redirect_to performances_path
     else
@@ -28,6 +30,10 @@ class PerformancesController < ApplicationController
 
   def show
     @performance = Performance.find(params[:id])
+    unless @performance.user == current_user || current_user.admin?
+      flash[:danger] = "管理者以外は他ユーザの稼働実績は見れません．"
+      redirect_to performances_path
+    end
   end
 
   def approve
@@ -68,16 +74,5 @@ class PerformancesController < ApplicationController
                                           :content,
                                           :permission,
                                           :project_id)
-    end
-
-    def edit_performance_params
-      params.require(:performance).permit(  :start_date,
-                                            :start_time,
-                                            :end_date,
-                                            :end_time,
-                                            :content,
-                                            :permission,
-                                            :project_id
-      )
     end
 end
