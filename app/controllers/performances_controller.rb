@@ -1,6 +1,8 @@
 class PerformancesController < ApplicationController
   before_action :signed_in?
   before_action :admin_only!, only: [:unapprove, :approve]
+  before_action :not_allow_change!, only: [:edit, :update, :destroy]
+  before_action :person_limit!, only: [:edit, :destroy]
 
 
   def index
@@ -9,12 +11,7 @@ class PerformancesController < ApplicationController
 
   def edit
     @performance = Performance.find(params[:id])
-    if @performance.user == current_user
-      @performance_form = PerformanceForm.new.assign_performance_attributs(@performance)
-    else
-      flash[:danger] = "稼働実績作成者以外は変更できません"
-      redirect_to performances_path
-    end
+    @performance_form = PerformanceForm.new.assign_performance_attributs(@performance)
   end
 
   def update
@@ -80,5 +77,20 @@ private
                                           :content,
                                           :permission,
                                           :project_id)
+    end
+
+    def not_allow_change!
+      @performance = Performance.find(params[:id])
+      if @performance.permission?
+        flash[:danger] = "承認済みのため，変更が許可されていません．"
+        redirect_to performances_path
+      end
+    end
+
+    def person_limit!
+      unless Performance.find(params[:id]).user == current_user
+        flash[:danger] = "稼働実績作成者以外は変更できません"
+        redirect_to performances_path
+      end
     end
 end
