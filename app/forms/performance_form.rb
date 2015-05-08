@@ -1,7 +1,7 @@
 class PerformanceForm
   include ActiveModel::Model
 
-  attr_accessor :start_date, :start_time, :end_date, :end_time, :permission, :content, :user_id, :project_id
+  attr_accessor :start_date, :start_time, :end_date, :end_time, :permission, :content, :user_id, :project_id, :id
 
   def performance_attributes
     {
@@ -25,5 +25,10 @@ class PerformanceForm
   def save
     @performance = Performance.new(performance_attributes)
     @performance.save
+  end
+
+  def update
+    @performance = Performance.find(@id)
+    @performance.update_attributes(performance_attributes)
   end
 end
