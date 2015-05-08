@@ -126,10 +126,10 @@ RSpec.describe "PerformancePages", type: :request do
 
       describe "incorrect access to other user performances" do
         before { visit performance_path(other_user_performance) }
-        it { should have_selector("div.alert.alert-danger", "管理者以外は他ユーザの稼働実績は見れません") }
+        it { should have_selector("div.alert.alert-danger", text: "管理者以外は他ユーザの稼働実績は見れません") }
       end
     end
-    
+
     describe "should render my performance change view" do
       before { visit edit_performance_path(user_performance) }
 
@@ -138,7 +138,39 @@ RSpec.describe "PerformancePages", type: :request do
 
       describe "incorrect access to other user performance change view" do
         before { visit edit_performance_path(other_user_performance) }
-        it { should have_selector("div.alert.alert-danger", "稼働実績作成者以外は変更できません．") }
+        it { should have_selector("div.alert.alert-danger", text: "稼働実績作成者以外は変更できません") }
+      end
+      describe "incorrect access to approved my performance" do
+        before do
+          user_performance.permission = true
+          user_performance.approver_id = other_user.id
+          user_performance.save!
+          visit edit_performance_path(user_performance.reload)
+        end
+        it { should have_selector("div.alert.alert-danger", text: "承認済みのため，変更が許可されていません．") }
+      end
+    end
+
+    describe "should delete my performance" do
+      describe "incorrect access to" do
+        context "approved my performance" do
+          before do
+            user_performance.permission = true
+            user_performance.approver_id = other_user.id
+            user_performance.save!
+            delete performance_path(user_performance)
+          end
+          it { expect(current_path).to eq performances_path }
+        end
+        context "approved other performance" do
+          before do
+            other_user_performance.permission = true
+            other_user_performance.approver_id = user.id
+            other_user_performance.save!
+            delete performance_path(other_user_performance)
+          end
+          it { expect(current_path).to eq performances_path }
+        end
       end
     end
   end
