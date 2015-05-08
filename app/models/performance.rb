@@ -1,5 +1,6 @@
 class Performance < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user,      :class_name => "User",  :foreign_key => "user_id"
+  belongs_to :approver,  :class_name => "User",  :foreign_key => "approver_id"
   belongs_to :project
 
   validates :start_time,  presence: true

@@ -36,6 +36,8 @@ RSpec.describe "Performances", type: :request do
   it { should respond_to(:project_id) }
   it { should respond_to(:user) }
   it { should respond_to(:project) }
+  it { should respond_to(:approver_id) }
+  it { should respond_to(:approver) }
 
   it { should be_valid }
 
@@ -80,6 +82,20 @@ RSpec.describe "Performances", type: :request do
     end
   end
 
+  describe "get approver" do
+    let!(:user)   { FactoryGirl.create(:staff) }
+    let!(:admin)  { FactoryGirl.create(:admin) }
+    before do
+      @performance = user.performances.first
+      @performance.permission = true
+      @performance.approver_id = admin.id
+      @performance.save
+    end
+    it "get approver name" do
+      expect(@performance.reload.approver.name).to eq admin.name
+    end
+  end
+
   describe "change permission" do
     before do
       @before_permission = @performance.permission
@@ -87,6 +103,8 @@ RSpec.describe "Performances", type: :request do
     end
     it { expect(@performance.permission).not_to eq @before_permission }
     it { expect(@performance.permission).to eq !@before_permission }
+    it { should_not be_valid }
+
   end
 
 end
