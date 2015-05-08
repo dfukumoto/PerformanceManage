@@ -1,0 +1,35 @@
+<% provide(:title, "稼働実績一覧") %>
+<table class="table table-striped">
+  <tr>
+    <th>ユーザ名</th><th>プロジェクト名</th><th>作業時間</th><th>承認者</th><th>    </th>
+  </tr>
+<% @performances.each do |performance| %>
+  <tr>
+    <td>
+      <%= performance.user.name %>
+    </td>
+    <td>
+      <%= performance.project.name %>
+    </td>
+    <td>
+      <%= performance.start_time %> ~ <%= performance.end_time %>
+    </td>
+    <% unless performance.permission %>
+      <td>
+        
+      </td>
+      <td>
+        <%= link_to "変更", edit_performance_path(performance), class: "btn btn-primary" %>
+        <%= link_to "削除", performance, method: :delete, data: { confirm: "稼働実績を削除しますか?" }, class: "btn btn-danger" %>
+      </td>
+      <% else %>
+      <td>
+        <%= performance.approver.name %>
+      </td>
+      <td>
+        <span class="label label-default">承認済み</span>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,27 @@
+<%= form_for(@performance, :url => { :controller => :performances, :action => :update }) do |f| %>
+  <table class="table">
+    <tr>
+      <td><%= f.label "プロジェクト" %></td>
+      <td><%= f.select :project_id, @user.projects.map{|p| [p.name, p.id]}, :selected => @performance.project.name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "開始日時" %></td>
+      <td>
+        <%= f.select :start_date, create_date, :selected => @performance.start_time.to_s.split[0] %>
+        <%= f.select :start_time, create_time, :selected => @performance.start_time.to_s.split[1] %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label "終了日時" %></td>
+      <td>
+        <%= f.select :end_date, create_date, :selected => @performance.end_time.to_s.split[0] %>
+        <%= f.select :end_time, create_time, :selected => @performance.end_time.to_s.split[1] %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label "作業内容" %></td>
+      <td><%= f.text_area :content, :size => "50x10", :value => @performance.content %></td>
+    </tr>
+  </table>
+  <%= f.submit "稼働変更", class: "btn btn-primary"%>
+<% end %>
