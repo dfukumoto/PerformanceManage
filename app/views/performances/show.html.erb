@@ -15,6 +15,6 @@
   </tr>
 </table>
 
-<% if current_user.admin? %>
+<% if current_user.admin? && !@performance.permission %>
   <%= link_to "承認", approve_performance_path(@performance), method: "patch", class: "btn btn-primary" %>
 <% end %>
