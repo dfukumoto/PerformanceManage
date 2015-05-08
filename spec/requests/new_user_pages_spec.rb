@@ -108,5 +108,4 @@ RSpec.describe "NewUserPages", type: :request do
       end
     end
   end
-  it { binding.pry }
 end

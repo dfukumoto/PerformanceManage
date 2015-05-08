@@ -1,23 +1,32 @@
 FactoryGirl.define do
   factory :user do
-        name    Faker::Name.name
-       email    Faker::Internet.email
     password              "foobar"
     password_confirmation "foobar"
 
-
     factory :admin do
+      name    Faker::Name.name
+      email    Faker::Internet.email
       authority 1
-      after(:create) {|admin|
-        create(:performance, user: admin, project: create(:project))
+      after(:create) {|user|
+        create(:performance, user: user, project: create(:project))
       }
     end
 
     factory :staff do
+      name    Faker::Name.name
+      email    Faker::Internet.email
       authority 2
+      after(:create) {|user|
+        create(:performance, user: user, project: create(:project))
+      }
     end
     factory :partner do
+      name    Faker::Name.name
+      email    Faker::Internet.email
       authority 3
+      after(:create) {|user|
+        create(:performance, user: user, project: create(:project))
+      }
     end
   end
 

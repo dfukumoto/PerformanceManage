@@ -1,5 +1,6 @@
 class Performance < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user,      :class_name => "User",  :foreign_key => "user_id"
+  belongs_to :approver,  :class_name => "User",  :foreign_key => "approver_id"
   belongs_to :project
 
   validates :start_time,  presence: true
@@ -7,6 +8,7 @@ class Performance < ActiveRecord::Base
   validates :content,     presence: true
   validates :project_id,  presence: true
   validates :user_id,     presence:true
+  validates :approver_id, presence: true, if: :approve?
 
   validate  :end_time_check
 
@@ -14,5 +16,9 @@ class Performance < ActiveRecord::Base
     if self.end_time <= self.start_time
       errors.add(:end_time, "日付を正しく入力してください．")
     end
+  end
+
+  def approve?
+    self.permission == true
   end
 end

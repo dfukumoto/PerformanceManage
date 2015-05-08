@@ -13,7 +13,7 @@ class PerformancesController < ApplicationController
 
   def approve
     @performance = Performance.find(params[:id])
-    if @performance.update(permission: true)
+    if @performance.update(permission: true, approver_id: current_user.id)
       flash[:success] = "承認しました．"
       redirect_to unapprove_performances_path
     else
