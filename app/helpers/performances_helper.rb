@@ -5,9 +5,8 @@ module PerformancesHelper
   end
 
   def create_time
-    time_range = Time.now.all_day
-    time = time_range.first
-    last = time_range.last
+    time = Time.now.beginning_of_day
+    last = Time.now.end_of_day
     return_array = []
     while time < last
       return_array << time
