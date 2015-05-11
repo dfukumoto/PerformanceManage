@@ -6,7 +6,7 @@
         <ul class="nav pull-right">
           <% if signed_in? %>
             <% unless current_user.partner? %>
-              <li><%= link_to "プロジェクト", "#" %></li>
+              <li><%= link_to "プロジェクト", projects_path %></li>
             <% end %>
             <li><%= link_to "稼働実績一覧", performances_path %></li>
             <li><%= link_to "サインアウト", signout_path, method: "delete" %></li>

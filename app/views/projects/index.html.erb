@@ -1,0 +1,26 @@
+<% provide(:title, "プロジェクト一覧") %>
+<table class="table table-striped">
+  <tr>
+    <th>プロジェクト名</th><th>期間</th><th>状態</th><th> </th>
+  </tr>
+<% @projects.each do |project| %>
+  <tr>
+    <td>
+      <%= project.name %>
+    </td>
+    <td>
+      <%= project.start_date %> ~ <%= project.end_date %>
+    </td>
+    <td>
+      <% if project.end_date.strftime < Date.today.strftime %>
+        <span class="label label-default">Close</span>
+      <% else %>
+        <span class="label label-primary">Open</span>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to "詳細", project_path(project) %>
+    </td>
+  </tr>
+<% end %>
+</table>
