@@ -1,4 +1,4 @@
-<%= form_for(@project_form, :url => {:controller => :projects, action: :create}, method: "post" ) do |f| %>
+<%= form_for(ProjectForm.new, :url => {:controller => :projects, action: :create}, method: "post" ) do |f| %>
   <table class="table">
     <tr>
       <td><%= f.label "プロジェクト名" %></td>
@@ -7,8 +7,8 @@
     <tr>
       <td><%= f.label "期間" %></td>
       <td>
-        <%= f.select :start_date, create_date %>
-        <%= f.select :end_date,   create_date %>
+        <%= f.text_field :start_date, placeholder: Date.today.strftime("%Y/%m/%d") %> ~
+        <%= f.text_field :end_date, placeholder: Date.today.next_month.strftime("%Y/%m/%d") %>
       </td>
     </tr>
     <tr>
@@ -26,9 +26,9 @@
     <tr>
       <td><%= f.label "種別" %></td>
       <td>
-        <%= f.select :group, ProjectGroup.all%>
+        <%= f.select :group_id, ProjectGroup.all.map{|group| [group.name, group.id] }%>
       </td>
     </tr>
   </table>
-  <%= f.submit "稼働登録", class: "btn btn-primary"%>
+  <%= f.submit "プロジェクト新規作成", class: "btn btn-primary"%>
 <% end %>
