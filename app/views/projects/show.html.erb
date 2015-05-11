@@ -1,0 +1,34 @@
+<% provide(:title, "プロジェクト詳細") %>
+
+<table class="table unapprove_show">
+  <tr>
+    <td>プロジェクト名</td><td><%= @project.name %></td>
+  </tr>
+  <tr>
+    <td>期間</td><td><%= @project.start_date %> ~ <%= @project.end_date %></td>
+  </tr>
+  <tr>
+    <td>状態</td>
+    <td>
+      <% if @project.end_date.strftime < Date.today.strftime %>
+        <span class="label label-default">Close</span>
+      <% else %>
+        <span class="label label-primary">Open</span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>受注先</td><td><%= @project.order %></td>
+  </tr>
+  <tr>
+    <td>プロジェクトコード</td><td><%= @project.project_code %></td>
+  </tr>
+  <tr>
+    <td>メンバー</td>
+    <td>
+      <% @project.users.each do |user| %>
+        <%= user.name %><br>
+      <% end %>
+    </td>
+  </tr>
+</table>
