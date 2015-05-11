@@ -26,9 +26,7 @@
   <tr>
     <td>メンバー</td>
     <td>
-      <% @project.users.each do |user| %>
-        <%= user.name %><br>
-      <% end %>
+      <%= select :member, :index, @project_users, {}, {:multiple => false, :size => @project_users.length+1} %>
     </td>
   </tr>
 </table>

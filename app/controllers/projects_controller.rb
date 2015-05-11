@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @project_users = project_users(@project)
   end
 
   def new
@@ -33,4 +34,11 @@ private
                                           :project_code,
                                           :group_id)
   end
+
+  def project_users(project)
+    users = []
+    project.users.each do |user|
+      users << [user.name, user.id]
+    end
+    users
 end
