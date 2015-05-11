@@ -29,6 +29,12 @@
         <%= f.select :group_id, ProjectGroup.all.map{|group| [group.name, group.id] }%>
       </td>
     </tr>
+    <tr>
+      <td>メンバー</td>
+      <td>
+        <%= f.select :members, @users, {}, { :multiple => true, :size => 4 }%>
+      </td>
+    </tr>
   </table>
   <%= f.submit "プロジェクト新規作成", class: "btn btn-primary"%>
 <% end %>

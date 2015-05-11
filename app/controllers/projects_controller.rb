@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project_form = ProjectForm.new
+    @users = assign_users
   end
 
   def create
@@ -21,6 +22,7 @@ class ProjectsController < ApplicationController
       redirect_to user_path
     else
       flash.now[:danger] = "プロジェクトの新規作成に失敗しました．"
+      @users = assign_users
       render 'projects/new'
     end
   end
@@ -32,7 +34,8 @@ private
                                           :end_date,
                                           :order,
                                           :project_code,
-                                          :group_id)
+                                          :group_id,
+                                          :members)
   end
 
   def project_users(project)
@@ -41,4 +44,14 @@ private
       users << [user.name, user.id]
     end
     users
+  end
+
+  def assign_users
+    users = User.all
+    [].tap do |array|
+      users.each do |user|
+        array.push([user.name, user.id])
+      end
+    end
+  end
 end
