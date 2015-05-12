@@ -46,4 +46,11 @@ class ApplicationController < ActionController::Base
         redirect_to user_path
       end
     end
+
+    def reject_partner!
+      if current_user.partner?
+        flash[:danger] = "パートナー権限ではアクセスできません．"
+        redirect_to user_path
+      end
+    end
 end
