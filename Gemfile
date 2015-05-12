@@ -21,6 +21,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'heart_seed'
 end
 
 group :test do
