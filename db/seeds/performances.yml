@@ -1,0 +1,82 @@
+---
+performances_1:
+  id: 1
+  user_id: 1
+  project_id: 1
+  start_time: 2015/05/12 10:00
+  end_time: 2015/05/12 15:00
+  content: テスト稼働実績1
+  permission: 'FALSE'
+  approver_id: nil
+performances_2:
+  id: 2
+  user_id: 2
+  project_id: 1
+  start_time: 2015/05/12 10:00
+  end_time: 2015/05/12 14:00
+  content: テスト稼働実績2
+  permission: 'FALSE'
+  approver_id: nil
+performances_3:
+  id: 3
+  user_id: 3
+  project_id: 2
+  start_time: 2015/05/12 10:00
+  end_time: 2015/05/12 14:00
+  content: テスト稼働実績3
+  permission: 'FALSE'
+  approver_id: nil
+performances_4:
+  id: 4
+  user_id: 1
+  project_id: 2
+  start_time: 2015/05/13 10:00
+  end_time: 2015/05/13 17:00
+  content: テスト稼働実績4
+  permission: 'FALSE'
+  approver_id: nil
+performances_5:
+  id: 5
+  user_id: 2
+  project_id: 2
+  start_time: 2015/05/13 10:00
+  end_time: 2015/05/13 16:00
+  content: テスト稼働実績5
+  permission: 'FALSE'
+  approver_id: nil
+performances_6:
+  id: 6
+  user_id: 3
+  project_id: 3
+  start_time: 2015/05/13 10:00
+  end_time: 2015/05/13 13:00
+  content: テスト稼働実績6
+  permission: 'TRUE'
+  approver_id: 1
+performances_7:
+  id: 7
+  user_id: 1
+  project_id: 3
+  start_time: 2015/05/14 10:00
+  end_time: 2015/05/14 19:00
+  content: テスト稼働実績7
+  permission: 'TRUE'
+  approver_id: 1
+performances_8:
+  id: 8
+  user_id: 2
+  project_id: 3
+  start_time: 2015/05/14 10:00
+  end_time: 2015/05/14 15:00
+  content: テスト稼働実績8
+  permission: 'TRUE'
+  approver_id: 1
+performances_9:
+  id: 9
+  user_id: 3
+  project_id: 4
+  start_time: 2015/05/14 10:00
+  end_time: 2015/05/14 13:00
+  content: テスト稼働実績9
+  permission: 'FALSE'
+  approver_id: nil
