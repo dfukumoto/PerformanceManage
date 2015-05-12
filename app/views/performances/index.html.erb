@@ -1,7 +1,7 @@
 <% provide(:title, "稼働実績一覧") %>
 <table class="table table-striped">
   <tr>
-    <th>ユーザ名</th><th>プロジェクト名</th><th>作業時間</th><th>承認者</th><th>    </th>
+    <th>ユーザ名</th><th>プロジェクト名</th><th>作業時間</th><th>承認状況</th><th>承認者</th><th>    </th>
   </tr>
 <% @performances.each do |performance| %>
   <tr>
@@ -15,8 +15,8 @@
       <%= performance.start_time %> ~ <%= performance.end_time %>
     </td>
     <% unless performance.permission %>
-      <td>
-
+      <td colspan="2" align=center>
+        <div class="label label-success">未承認</div>
       </td>
       <td>
         <%= link_to "詳細", performance_path(performance), class: "btn btn-info"%>
@@ -25,8 +25,10 @@
       </td>
       <% else %>
       <td>
+        <div class="label label-warning">承認済み</div>
+      </td>
+      <td>
         <%= performance.approver.name %>
-        <span class="label label-default">承認済み</span>
       </td>
       <td>
         <%= link_to "詳細", performance_path(performance), class: "btn btn-info"%>

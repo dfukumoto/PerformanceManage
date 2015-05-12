@@ -10,22 +10,30 @@
   <%= render 'layouts/header' %>
   <div class="container">
     <% if signed_in? %>
-      <p>ユーザ名:<%= current_user.name %></p>
-      <p>ユーザID:<%= current_user.email %></p>
-      <p>権限: <%= current_user.authority %></p>
+      <div class="row user-info">
+        <p>ユーザ名:<%= current_user.name %></p>
+        <p>ユーザID:<%= current_user.email %></p>
+        <p>権限: <%= current_user.authority %></p>
+      </div>
       <% if current_user.admin? %>
-        <p><%= link_to 'ユーザ新規作成', new_user_path, class: "btn btn-primary"%></p>
-        <p><%= link_to 'プロジェクト作成', new_project_path, class: "btn btn-primary" %></p>
-        <p><%= link_to '未承認稼働実績一覧',  unapprove_performances_path, class: "btn btn-primary" %></p>
+      <div class="row">
+        <ul class="buttons-for-admin">
+          <li><%= link_to 'ユーザ新規作成', new_user_path, class: "btn btn-primary"%></li>
+          <li><%= link_to 'プロジェクト作成', new_project_path, class: "btn btn-primary" %></li>
+          <li>
+            <%= link_to unapprove_performances_path, class: "btn btn-primary" do %>
+              未承認稼働実績一覧<span class="badge"><%= Performance.where(:permission => false).count %></span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
       <% end %>
       <% flash.each do |key, value|  %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
     <% end %>
-
-    <hr>
-
     <%= yield %>
+    <%= render 'layouts/footer' %>
   </div>
 
 </body>
