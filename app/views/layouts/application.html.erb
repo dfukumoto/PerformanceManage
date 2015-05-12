@@ -15,6 +15,7 @@
       <p>権限: <%= current_user.authority %></p>
       <% if current_user.admin? %>
         <p><%= link_to 'ユーザ新規作成', new_user_path, class: "btn btn-primary"%></p>
+        <p><%= link_to 'プロジェクト作成', new_project_path, class: "btn btn-primary" %></p>
         <p><%= link_to '未承認稼働実績一覧',  unapprove_performances_path, class: "btn btn-primary" %></p>
       <% end %>
       <% flash.each do |key, value|  %>
