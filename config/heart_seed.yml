@@ -1,0 +1,6 @@
+seed_dir: db/seeds
+xls_dir: db/xls
+catalogs:
+#  user:
+#  - users
+#  - user_profiles

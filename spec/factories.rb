@@ -42,7 +42,7 @@ FactoryGirl.define do
     name        "ExampleProject"
     start_date  "2015/04/01"
     end_date    "2015/09/01"
-    group       1
+    group_id       1
     order       "ExampleInc"
     project_code  "EXAMPLECODE"
   end

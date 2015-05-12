@@ -1,0 +1,33 @@
+---
+projects_1:
+  id: 1
+  start_date: 2015/05/01
+  end_date: 2015/07/01
+  group_id: 1
+  order: AAAA
+  project_code: XXXXXXX1
+  name: プロジェクトX1
+projects_2:
+  id: 2
+  start_date: 2015/05/01
+  end_date: 2015/07/01
+  group_id: 1
+  order: BBBB
+  project_code: XXXXXXX2
+  name: プロジェクトX2
+projects_3:
+  id: 3
+  start_date: 2015/06/01
+  end_date: 2016/01/01
+  group_id: 1
+  order: CCCC
+  project_code: XXXXXXX3
+  name: プロジェクトX3
+projects_4:
+  id: 4
+  start_date: 2015/06/01
+  end_date: 2016/01/01
+  group_id: 1
+  order: DDDD
+  project_code: XXXXXXX4
+  name: プロジェクトX4
