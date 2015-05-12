@@ -26,8 +26,13 @@ class ProjectForm
     end
   end
 
+  # params[:project_form][:member_ids]から空を削除した配列を返す．
+  def shape_user_ids
+    @member_ids.reject(&:empty?)
+  end
+
   def project_member_create(project)
-    if @member_ids.reject!(&:empty?).length == 0
+    if shape_user_ids.length == 0
       false
     else
       @member_ids.each do |user_id|
