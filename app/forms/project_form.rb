@@ -14,6 +14,18 @@ class ProjectForm
     end
   end
 
+  def assign_project_attributes(project)
+    tap do |instance|
+      instance.name         = project.name
+      instance.start_date   = project.start_date.strftime("%Y/%m/%d")
+      instance.end_date     = project.end_date.strftime("%Y/%m/%d")
+      instance.order        = project.order
+      instance.project_code = project.project_code
+      instance.group_id     = project.group_id
+      instance.member_ids   = generate_assigned_members(project)
+    end
+  end
+
   def project_member_create(project)
     if @member_ids.reject!(&:empty?).length == 0
       false
@@ -22,6 +34,14 @@ class ProjectForm
         ProjectMember.create(:project_id => project.id, :user_id => user_id.to_i)
       end
       true
+    end
+  end
+
+  def generate_assigned_members(project)
+    [].tap do |array|
+      project.users.each do |member|
+        array.push(member.id)
+      end
     end
   end
 end
