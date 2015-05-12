@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  include Enumerize
+  extend Enumerize
 
   before_save { self.email = email.downcase }
   before_create :create_remember_token

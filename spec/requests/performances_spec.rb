@@ -9,7 +9,7 @@ RSpec.describe "Performances", type: :request do
                     authority: 1)
 
     @project = Project.create( name: "ExampleProject",
-                              group: 1,
+                           group_id: 1,
                               order: "ExampleInc",
                        project_code: "EXAMPLE",
                          start_date: "2015/05/01",
