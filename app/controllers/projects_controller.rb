@@ -66,9 +66,9 @@ private
     users
   end
 
-  # 新規プロジェクトを新規作成する時に使うユーザの配列を生成する．
+  # プロジェクト新規作成・編集に使うユーザの配列を生成する．
   def assign_users
-    users = User.all
+    users = User.all.order(:id)
     @users = [].tap do |array|
       users.each do |user|
         array.push([user.name, user.id])
