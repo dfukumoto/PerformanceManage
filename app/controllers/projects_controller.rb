@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :project_find, only: [ :show, :edit, :update ]
   before_action :assign_users, only: [ :new, :edit, :update ]
+  before_action :admin_only!,  only: [ :new, :create, :edit, :update ]
+  before_action :reject_partner!
 
   def index
     @projects = current_user.projects
