@@ -15,16 +15,19 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    @users = assign_users
     @project = Project.new
     @project_form = ProjectForm.new(project_params)
     @project.assign_attributes(@project_form.project_attributes)
-    if @project.save
+    if !(@project_form.shape_user_ids.present?)
+      flash.now[:danger] = "プロジェクトの新規作成に失敗しました．"
+      render action: :new
+    elsif @project.save
       @project_form.project_member_create(@project)
       flash[:success] = "プロジェクトを新規作成しました．"
       redirect_to user_path
     else
       flash.now[:danger] = "プロジェクトの新規作成に失敗しました．"
-      @users = assign_users
       render 'projects/new'
     end
   end
