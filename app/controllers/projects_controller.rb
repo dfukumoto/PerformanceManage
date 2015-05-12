@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
     @project_form = ProjectForm.new(project_params)
     @project.assign_attributes(@project_form.project_attributes)
     if @project.save
+      @project_form.project_member_create(@project)
       flash[:success] = "プロジェクトを新規作成しました．"
       redirect_to user_path
     else
@@ -35,9 +36,10 @@ private
                                           :order,
                                           :project_code,
                                           :group_id,
-                                          :members)
+                                          member_ids: [])
   end
 
+  # 引数のプロジェクトに属するユーザの配列を生成する．
   def project_users(project)
     users = []
     project.users.each do |user|
@@ -46,6 +48,7 @@ private
     users
   end
 
+  # 新規プロジェクトを新規作成する時に使うユーザの配列を生成する．
   def assign_users
     users = User.all
     [].tap do |array|
