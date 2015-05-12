@@ -1,0 +1,40 @@
+<%= form_for(@project_form, :url => {:controller => :projects, action: :update}, method: "patch" ) do |f| %>
+  <table class="table">
+    <tr>
+      <td><%= f.label "プロジェクト名" %></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "期間" %></td>
+      <td>
+        <%= f.text_field :start_date, placeholder: Date.today.strftime("%Y/%m/%d") %> ~
+        <%= f.text_field :end_date, placeholder: Date.today.next_month.strftime("%Y/%m/%d") %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label "受注先" %></td>
+      <td>
+        <%= f.text_field :order %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label "プロジェクトコード" %></td>
+      <td>
+        <%= f.text_field :project_code %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label "種別" %></td>
+      <td>
+        <%= f.select :group_id, ProjectGroup.all.map{|group| [group.name, group.id] }%>
+      </td>
+    </tr>
+    <tr>
+      <td>メンバー</td>
+      <td>
+        <%= f.select :member_ids, @users, {}, { :multiple => true, :size => 20, :selected => @project_form.member_ids }%>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit "変更", class: "btn btn-primary"%>
+<% end %>

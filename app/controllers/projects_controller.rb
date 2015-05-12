@@ -1,16 +1,17 @@
 class ProjectsController < ApplicationController
+  before_action :project_find, only: [ :show, :edit, :update ]
+  before_action :assign_users, only: [ :new, :edit, :update ]
+
   def index
     @projects = current_user.projects
   end
 
   def show
-    @project = Project.find(params[:id])
     @project_users = project_users(@project)
   end
 
   def new
     @project_form = ProjectForm.new
-    @users = assign_users
   end
 
   def create
@@ -25,6 +26,23 @@ class ProjectsController < ApplicationController
       flash.now[:danger] = "プロジェクトの新規作成に失敗しました．"
       @users = assign_users
       render 'projects/new'
+    end
+  end
+
+  def edit
+    @project_form = ProjectForm.new.assign_project_attributes(@project)
+  end
+
+  def update
+    @project_form = ProjectForm.new(project_params)
+    @project.assign_attributes(@project_form.project_attributes)
+    if @project.save
+      # TODO: ProjectMemberテーブルを更新する処理を書く．
+      flash[:success] = "プロジェクト情報を変更しました．"
+      redirect_to projects_path
+    else
+      flash.now[:danger] = "プロジェクト情報の変更に失敗しました．"
+      render action: 'edit'
     end
   end
 
@@ -51,10 +69,14 @@ private
   # 新規プロジェクトを新規作成する時に使うユーザの配列を生成する．
   def assign_users
     users = User.all
-    [].tap do |array|
+    @users = [].tap do |array|
       users.each do |user|
         array.push([user.name, user.id])
       end
     end
+  end
+
+  def project_find
+    @project = Project.find(params[:id])
   end
 end
