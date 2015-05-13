@@ -7,8 +7,8 @@
     <tr>
       <td><%= f.label "期間" %></td>
       <td>
-        <%= f.date_field :start_date %> 〜
-        <%= f.date_field :end_date %>
+        <%= f.date_field :start_date, :value => Date.today.strftime("%Y-%m-%d") %> 〜
+        <%= f.date_field :end_date, :value => Date.today.next_month.strftime("%Y-%m-%d") %>
       </td>
     </tr>
     <tr>

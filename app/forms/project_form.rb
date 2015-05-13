@@ -17,8 +17,8 @@ class ProjectForm
   def assign_project_attributes(project)
     tap do |instance|
       instance.name         = project.name
-      instance.start_date   = project.start_date.strftime("%Y/%m/%d")
-      instance.end_date     = project.end_date.strftime("%Y/%m/%d")
+      instance.start_date   = project.start_date
+      instance.end_date     = project.end_date
       instance.order        = project.order
       instance.project_code = project.project_code
       instance.group_id     = project.group_id
