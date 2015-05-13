@@ -49,4 +49,22 @@ class ProjectForm
       end
     end
   end
+
+  def users_attributes
+    shape_user_ids.map do |user|
+      [].tap do |array|
+        array << User.find(user.to_i)
+      end
+    end
+  end
+
+=begin
+  def users_attributes
+    shape_user_ids.map.with_index do |member_id, index|
+      {}.tap do |hash|
+        hash.store(index.to_s, {id: member_id.to_i})
+      end
+    end
+  end
+=end
 end
