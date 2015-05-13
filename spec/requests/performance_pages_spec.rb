@@ -23,10 +23,8 @@ RSpec.describe "PerformancePages", type: :request do
   describe "valid information" do
     before do
       select project.name,    from: "performance_form_project_id"
-      select "2015/05/06",    from: "performance_form_start_date"
-      select "10:00",         from: "performance_form_start_time"
-      select "2015/05/06",    from: "performance_form_end_date"
-      select "17:00",         from: "performance_form_end_time"
+      fill_in "performance_form_start_time",  with: "2015-05-06T10:00"
+      fill_in "performance_form_end_time",    with: "2015-05-06T17:00"
       fill_in "performance_form_content",      with: "ExamplePerformance"
     end
 
@@ -43,10 +41,8 @@ RSpec.describe "PerformancePages", type: :request do
     describe "leave content" do
       before do
         select project.name,  from: "performance_form_project_id"
-        select "2015/05/06",  from: "performance_form_start_date"
-        select "10:00",       from: "performance_form_start_time"
-        select "2015/05/06",  from: "performance_form_end_date"
-        select "17:00",       from: "performance_form_end_time"
+        fill_in "performance_form_start_time",  with: "2015-05-06T10:00"
+        fill_in "performance_form_end_time",    with: "2015-05-06T17:00"
       end
       it "shouldnt create a performance" do
         expect{ click_button "稼働登録" }.not_to change(Performance, :count)
@@ -59,10 +55,8 @@ RSpec.describe "PerformancePages", type: :request do
     describe "same start_datetime and end_datetime" do
       before do
         select project.name,  from: "performance_form_project_id"
-        select "2015/05/06",  from: "performance_form_start_date"
-        select "10:00",       from: "performance_form_start_time"
-        select "2015/05/06",  from: "performance_form_end_date"
-        select "10:00",       from: "performance_form_end_time"
+        fill_in "performance_form_start_time", with: "2015-05-06T10:00"
+        fill_in "performance_form_end_time", with: "2015-05-06T10:00"
         fill_in "performance_form_content", with: "ExamplePerformance"
         click_button "稼働登録"
       end
@@ -77,10 +71,8 @@ RSpec.describe "PerformancePages", type: :request do
     describe "when end_time than start_time in the past" do
       before do
         select project.name,  from: "performance_form_project_id"
-        select "2015/05/06",  from: "performance_form_start_date"
-        select "15:00",       from: "performance_form_start_time"
-        select "2015/05/06",  from: "performance_form_end_date"
-        select "10:00",       from: "performance_form_end_time"
+        fill_in "performance_form_start_time",  with: "2015-05-06T15:00"
+        fill_in "performance_form_end_time",    with: "2015-05-06T10:00"
         fill_in "performance_form_content", with: "ExamplePerformance"
       end
       it "shouldnt create a performance" do
@@ -170,6 +162,44 @@ RSpec.describe "PerformancePages", type: :request do
             delete performance_path(other_user_performance)
           end
           it { expect(current_path).to eq performances_path }
+        end
+      end
+    end
+
+    describe "should change my performance" do
+      describe "incorrect access" do
+        context "approved my performance" do
+          before do
+            user_performance.permission = true
+            user_performance.approver_id = other_user.id
+            user_performance.end_time = "2015/05/07 20:00:00"
+            patch performance_path(user_performance)
+          end
+          it { expect(current_path).to eq performances_path }
+          it { expect(user_performance.reload.end_time.to_s).not_to eq "2015/05/07 20:00:00" }
+        end
+        context "not edit other performance" do
+          before do
+            other_user_performance.end_time = "2015/05/07 20:00:00"
+            patch performance_path(other_user_performance)
+          end
+          it { expect(current_path).to eq performances_path }
+          it { expect(other_user_performance.reload.end_time.to_s).not_to eq "2015/05/07 20:00:00" }
+        end
+      end
+      describe "correct access" do
+        context "valid info my performane" do
+          before do
+            click_link("変更", href: edit_performance_path(user_performance))
+            fill_in "performance_form_start_time",with: "2015-09-09T09:00"
+            fill_in "performance_form_end_time",  with: "2015-09-09T09:09"
+            fill_in "performance_form_content",   with: "変更できてますか？"
+            click_button "稼働登録"
+          end
+          it { expect(user_performance.reload.start_time.to_s).to eq "2015/09/09 09:00" }
+          it { expect(user_performance.reload.end_time.to_s).to eq "2015/09/09 09:09" }
+          it { expect(user_performance.reload.content).to eq "変更できてますか？" }
+          it { should have_selector("div.alert.alert-success", text: "稼働実績の変更に成功しました．") }
         end
       end
     end
