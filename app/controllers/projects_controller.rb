@@ -42,6 +42,7 @@ class ProjectsController < ApplicationController
   def update
     @project_form = ProjectForm.new(project_params)
     @project.assign_attributes(@project_form.project_attributes)
+    @project.users << @project_form.users_attributes(@project)
     if @project.save
       # TODO: ProjectMemberテーブルを更新する処理を書く．
       flash[:success] = "プロジェクト情報を変更しました．"

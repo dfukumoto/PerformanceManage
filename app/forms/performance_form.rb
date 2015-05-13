@@ -1,12 +1,12 @@
 class PerformanceForm
   include ActiveModel::Model
 
-  attr_accessor :start_datetime, :end_datetime, :content, :user_id, :project_id
+  attr_accessor :start_time, :end_time, :content, :user_id, :project_id
 
   def assign_performance_attributs(performance)
     tap do |instance|
-      instance.start_datetime = performance.start_date
-      instance.end_datetime   = performance.end_datetime
+      instance.start_time = performance.start_time
+      instance.end_time   = performance.end_time
       instance.content    = performance.content
       instance.user_id    = performance.user_id
       instance.project_id = performance.project_id
@@ -15,8 +15,8 @@ class PerformanceForm
 
   def performance_attributes
     {}.tap do |hash|
-      hash.store(:start_datetime, @start_datetime)
-      hash.store(:end_datetime, @end_datetime)
+      hash.store(:start_time, @start_time)
+      hash.store(:end_time, @end_time)
       hash.store(:content, @content)
       hash.store(:user_id, @user_id)
       hash.store(:project_id, @project_id)

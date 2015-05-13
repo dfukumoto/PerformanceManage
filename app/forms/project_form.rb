@@ -50,7 +50,10 @@ class ProjectForm
     end
   end
 
-  def users_attributes
+  # プロジェクトとユーザを紐付けるためにparamsのmember_idsを参照して，
+  # そのユーザオブジェクトを配列にして返す．
+  def users_attributes(project= nil)
+    project.users.delete_all unless project.nil?
     shape_user_ids.map do |user|
       [].tap do |array|
         array << User.find(user.to_i)

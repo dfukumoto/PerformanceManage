@@ -70,8 +70,8 @@ class PerformancesController < ApplicationController
 
 private
     def performance_params
-      params.require(:performance_form).permit(:start_datetime,
-                                          :end_datetime,
+      params.require(:performance_form).permit(:start_time,
+                                          :end_time,
                                           :content,
                                           :permission,
                                           :project_id)
