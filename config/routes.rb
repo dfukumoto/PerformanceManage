@@ -1,7 +1,7 @@
 PerformanceManage::Application.routes.draw do
   root "users#show"
-
-  resource :user
+  resource :user, controller: :users, only: [:show]
+  resources :users, only: [:index, :edit, :update, :new, :create]
   resources :performances do
     collection do
       get :unapprove, action: :unapprove
@@ -10,7 +10,7 @@ PerformanceManage::Application.routes.draw do
       patch :approve, action: :approve
     end
   end
-  resources :projects, only: [:index, :show, :create, :new, :edit, :update] 
+  resources :projects, only: [:index, :show, :create, :new, :edit, :update]
   resources :sessions, only: [ :new, :create, :destroy ]
   match '/signin',  to: 'sessions#new',     via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
