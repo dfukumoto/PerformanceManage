@@ -7,8 +7,8 @@
     <tr>
       <td><%= f.label "期間" %></td>
       <td>
-        <%= f.date_field :start_date %>
-        <%= f.date_field :end_date %>
+        <%= f.date_field :start_date, :value => @project_form.start_date.strftime("%Y-%m-%d") %>
+        <%= f.date_field :end_date, :value => @project_form.end_date.strftime("%Y-%m-%d") %>
       </td>
     </tr>
     <tr>
