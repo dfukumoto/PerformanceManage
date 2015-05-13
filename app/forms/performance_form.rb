@@ -23,12 +23,8 @@ class PerformanceForm
     end
   end
 
-  def performance_start_datetime
-    "#{@start_date} #{@start_time}"
-  end
-
-  def performance_end_datetime
-    "#{@end_date} #{@end_time}"
+  def generate_datetime(instance)
+    (self.send(instance) || DateTime.now).strftime("%Y-%m-%dT%H:%M")
   end
 
   def save
