@@ -7,8 +7,8 @@
     <tr>
       <td><%= f.label "期間" %></td>
       <td>
-        <%= f.text_field :start_date, placeholder: Date.today.strftime("%Y/%m/%d") %> ~
-        <%= f.text_field :end_date, placeholder: Date.today.next_month.strftime("%Y/%m/%d") %>
+        <%= f.date_field :start_date %>
+        <%= f.date_field :end_date %>
       </td>
     </tr>
     <tr>
