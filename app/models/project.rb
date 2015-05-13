@@ -1,7 +1,6 @@
 class Project < ActiveRecord::Base
   has_many :performances
-  belongs_to :project_group
-  has_one :project_group, :class_name => "ProjectGroup",  :primary_key => "group_id", :foreign_key => "id"
+  belongs_to :group, class_name: "ProjectGroup", foreign_key: "group_id"
   has_many :project_members
   has_many :users, through: :project_members
   has_many :partner_costs
