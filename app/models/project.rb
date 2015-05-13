@@ -5,6 +5,8 @@ class Project < ActiveRecord::Base
   has_many :users, through: :project_members
   has_many :partner_costs
 
+  accepts_nested_attributes_for :users
+
   validates :name,        presence: true
   validates :start_date,  presence: true
   validates :end_date,    presence: true

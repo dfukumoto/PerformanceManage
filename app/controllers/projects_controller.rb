@@ -21,11 +21,12 @@ class ProjectsController < ApplicationController
     @project = Project.new
     @project_form = ProjectForm.new(project_params)
     @project.assign_attributes(@project_form.project_attributes)
+    @project.users << @project_form.users_attributes
     if !(@project_form.shape_user_ids.present?)
       flash.now[:danger] = "プロジェクトの新規作成に失敗しました．"
       render action: :new
     elsif @project.save
-      @project_form.project_member_create(@project)
+#      @project_form.project_member_create(@project)
       flash[:success] = "プロジェクトを新規作成しました．"
       redirect_to user_path
     else
@@ -41,6 +42,7 @@ class ProjectsController < ApplicationController
   def update
     @project_form = ProjectForm.new(project_params)
     @project.assign_attributes(@project_form.project_attributes)
+    @project.users << @project_form.users_attributes(@project)
     if @project.save
       # TODO: ProjectMemberテーブルを更新する処理を書く．
       flash[:success] = "プロジェクト情報を変更しました．"
