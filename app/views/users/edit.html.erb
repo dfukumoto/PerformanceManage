@@ -1,0 +1,19 @@
+<% provide(:title, "編集") %>
+<h1>ユーザ情報変更</h1>
+<%= form_for(@user, :url => { :controller => :users, :action => :update }) do |f| %>
+<table class="table">
+  <tr>
+    <td><%= f.label "ユーザ名" %></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "ユーザID" %></td>
+    <td><%= f.text_field :email %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "権限" %></td>
+    <td><%= f.select :authority, User.authority.options %></td>
+  </tr>
+</table>
+<%= f.submit "変更", class: "btn btn-primary" %>
+<% end %>
