@@ -7,4 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Appended by `rake heart_seed:init`
-HeartSeed::DbSeed.import_all
+HeartSeed::DbSeed.import_all(mode: HeartSeed::DbSeed::ACTIVE_RECORD)
