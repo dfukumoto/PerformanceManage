@@ -1,0 +1,22 @@
+<% provide(:title, "ユーザ一覧") %>
+<table class="table table-striped">
+  <tr>
+    <th>ユーザ名</th><th>ユーザID</th><th>権限</th><th></th>
+  </tr>
+<% @users.each do |user| %>
+  <tr>
+    <td>
+      <%= user.name %>
+    </td>
+    <td>
+      <%= user.email %>
+    </td>
+    <td>
+      <%= user.authority %>
+    </td>
+    <td>
+      <%= link_to "変更", edit_user_path(user), class: "btn btn-primary" %>
+    </td>
+  </tr>
+<% end %>
+</table>
