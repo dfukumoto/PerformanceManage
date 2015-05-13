@@ -27,7 +27,19 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+  end
 
+  def update
+    @user = User.find(params[:id])
+    @user.assign_attributes(user_params)
+    if @user.save
+      flash[:success] = "ユーザ情報の変更に成功しました．"
+      redirect_to users_path
+    else
+      flash.now[:danger] = "ユーザ情報の変更に失敗しました．"
+      render action: :edit
+    end
   end
 
   private
