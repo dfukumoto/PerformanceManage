@@ -31,17 +31,6 @@ class ProjectForm
     @member_ids.reject(&:empty?)
   end
 
-  def project_member_create(project)
-    if shape_user_ids.length == 0
-      false
-    else
-      @member_ids.each do |user_id|
-        ProjectMember.create(:project_id => project.id, :user_id => user_id.to_i)
-      end
-      true
-    end
-  end
-
   def generate_assigned_members(project)
     [].tap do |array|
       project.users.each do |member|
