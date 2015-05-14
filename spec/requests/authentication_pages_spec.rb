@@ -17,6 +17,17 @@ RSpec.describe "AuthenticationPages", type: :request do
         before { visit unapprove_performances_path }
         it { should have_content("サインイン") }
       end
+      describe "signedin user incorrect access" do
+        let!(:staff) { FactoryGirl.create(:staff) }
+        before do
+          visit signin_path
+          fill_in "session_email",   with: staff.email
+          fill_in "session_password",with: staff.password
+          click_button "サインイン"
+          visit signin_path
+        end
+        it { expect(current_path).to eq user_path }
+      end
     end
 
     describe "signin page" do
@@ -91,7 +102,44 @@ RSpec.describe "AuthenticationPages", type: :request do
         it { should_not have_link("プロジェクト", href: "#") }
         it { should have_link("サインアウト", href: signout_path) }
       end
-
     end
+
+    describe "signout" do
+      let!(:staff) { FactoryGirl.create(:staff) }
+      before do
+        visit signin_path
+        fill_in "session_email",    with: staff.email
+        fill_in "session_password", with: staff.password
+        click_button "サインイン"
+        click_link "サインアウト"
+      end
+      it { expect(current_path).to eq signin_path }
+      it { expect(page.driver.browser.rack_mock_session.cookie_jar['remember_token'].present?).to eq false }
+    end
+  end
+
+  describe "admin only page" do
+    let!(:staff) { FactoryGirl.create(:staff) }
+    before do
+      visit signin_path
+      fill_in "session_email",   with: staff.email
+      fill_in "session_password",with: staff.password
+      click_button "サインイン"
+      visit new_user_path
+    end
+    it { expect(current_path).to eq user_path }
+  end
+
+  describe "reject partner" do
+    let!(:partner) { FactoryGirl.create(:partner) }
+    before do
+      visit signin_path
+      fill_in "session_email",    with: partner.email
+      fill_in "session_password", with: partner.password
+      click_button "サインイン"
+      visit projects_path
+    end
+    it { expect(current_path).to eq user_path }
+    it { have_selector("div.alert.alert-danger", text: "パートナー権限ではアクセスできません．") }
   end
 end
