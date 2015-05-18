@@ -15,7 +15,7 @@ RSpec.describe "NewUserPages", type: :request do
 
   describe "valid information" do
     before do
-      visit signup_path
+      visit new_user_path
       fill_in "user_name",    with: Faker::Name.name
       fill_in "user_email",   with: Faker::Internet.email
       fill_in "user_password",              with: "foobar"
@@ -33,7 +33,7 @@ RSpec.describe "NewUserPages", type: :request do
   describe "invalid information" do
     describe "same user information" do
       before do
-        visit signup_path
+        visit new_user_path
         fill_in "user_name",    with: "Example"
         fill_in "user_email",   with: admin.email
         fill_in "user_password",              with: "foobar"
@@ -50,7 +50,7 @@ RSpec.describe "NewUserPages", type: :request do
 
     describe "blank user_name" do
       before do
-        visit signup_path
+        visit new_user_path
         fill_in "user_email",   with: Faker::Internet.email
         fill_in "user_password",              with: "foobar"
         fill_in "user_password_confirmation", with: "foobar"
@@ -66,7 +66,7 @@ RSpec.describe "NewUserPages", type: :request do
 
     describe "blank user_email" do
       before do
-        visit signup_path
+        visit new_user_path
         fill_in "user_name",   with: Faker::Name.name
         fill_in "user_password",              with: "foobar"
         fill_in "user_password_confirmation", with: "foobar"
@@ -82,7 +82,7 @@ RSpec.describe "NewUserPages", type: :request do
 
     describe "blank password" do
       before do
-        visit signup_path
+        visit new_user_path
         fill_in "user_name",   with: Faker::Name.name
         fill_in "user_email",  with: Faker::Internet.email
       end

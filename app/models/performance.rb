@@ -11,10 +11,17 @@ class Performance < ActiveRecord::Base
   validates :approver_id, presence: true, if: :approve?
 
   validate  :end_time_check
+  validate  :approver_is_admin?, if: :approve?
 
   def end_time_check
     if self.end_time <= self.start_time
       errors.add(:end_time, "日付を正しく入力してください．")
+    end
+  end
+
+  def approver_is_admin?
+    unless User.find(self.approver_id).admin?
+      errors.add(:approver, "承認者は管理者のみです．")
     end
   end
 

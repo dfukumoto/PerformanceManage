@@ -136,7 +136,7 @@ RSpec.describe "PerformancePages", type: :request do
       describe "incorrect access to approved my performance" do
         before do
           user_performance.permission = true
-          user_performance.approver_id = other_user.id
+          user_performance.approver_id = admin.id
           user_performance.save!
           visit edit_performance_path(user_performance.reload)
         end
@@ -149,7 +149,7 @@ RSpec.describe "PerformancePages", type: :request do
         context "approved my performance" do
           before do
             user_performance.permission = true
-            user_performance.approver_id = other_user.id
+            user_performance.approver_id = admin.id
             user_performance.save!
             delete performance_path(user_performance)
           end
@@ -158,7 +158,7 @@ RSpec.describe "PerformancePages", type: :request do
         context "approved other performance" do
           before do
             other_user_performance.permission = true
-            other_user_performance.approver_id = user.id
+            other_user_performance.approver_id = admin.id
             other_user_performance.save!
             delete performance_path(other_user_performance)
           end
