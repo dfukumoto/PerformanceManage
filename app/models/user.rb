@@ -30,15 +30,15 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.authority.value.to_i == 1 ? true : false
+    self.authority.admin?
   end
 
   def staff?
-    self.authority.value.to_i == 2 ? true : false
+    self.authority.staff?
   end
 
   def partner?
-    self.authority.value.to_i == 3 ? true : false
+    self.authority.partner?
   end
 
   private
