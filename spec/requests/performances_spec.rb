@@ -97,13 +97,15 @@ RSpec.describe "Performances", type: :request do
   end
 
   describe "change permission" do
+    let!(:admin) { FactoryGirl.create(:admin) }
     before do
       @before_permission = @performance.permission
       @performance.permission = !@before_permission
+      @performance.approver_id = admin.id
     end
     it { expect(@performance.permission).not_to eq @before_permission }
     it { expect(@performance.permission).to eq !@before_permission }
-    it { should_not be_valid }
+    it { should be_valid }
 
   end
 

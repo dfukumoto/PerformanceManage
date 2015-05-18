@@ -1,3 +1,4 @@
+<% provide(:title, "プロジェクト新規作成") %>
 <%= form_for(ProjectForm.new, :url => {:controller => :projects, action: :create}, method: "post" ) do |f| %>
   <table class="table">
     <tr>

@@ -41,10 +41,6 @@ class User < ActiveRecord::Base
     self.authority.value.to_i == 3 ? true : false
   end
 
-  def assign_projects
-    Project.where(id: ProjectMember.where(user_id: self))
-  end
-
   private
 
     def create_remember_token
