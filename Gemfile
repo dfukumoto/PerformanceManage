@@ -10,6 +10,7 @@ gem 'bootstrap-sass'
 gem 'sprockets'
 gem 'bcrypt-ruby'
 gem 'enumerize'
+gem 'rails-i18n'
 
 group :development, :test do
   gem 'rails-erd'

@@ -144,7 +144,7 @@ RSpec.describe "NewUserPages", type: :request do
       it { expect(current_path).to eq users_path }
       it { expect(staff.name).to eq "ChangedName" }
       it { expect(staff.email).to eq "change@change.com" }
-      it { expect(staff.authority).to eq "パートナー" }
+      it { expect(staff.authority).to eq :partner }
     end
   end
 end

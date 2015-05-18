@@ -3,6 +3,7 @@ FactoryGirl.define do
     password              "foobar"
     password_confirmation "foobar"
     name    { Faker::Name.name }
+    Faker::Config.locale = :en
     email   { Faker::Internet.email }
     after(:create) do |user|
       create(:performance, user: user, project: create(:project))

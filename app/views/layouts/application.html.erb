@@ -13,13 +13,13 @@
       <div class="row user-info">
         <p>ユーザ名:<%= current_user.name %></p>
         <p>ユーザID:<%= current_user.email %></p>
-        <p>権限: <%= current_user.authority %></p>
+        <p>権限: <%= current_user.authority.text %></p>
       </div>
       <% if current_user.admin? %>
       <div class="row">
         <ul class="buttons-for-admin">
           <li><%= link_to 'ユーザ新規作成', new_user_path, class: "btn btn-primary"%></li>
-          <li><%= link_to 'ユーザ一覧', users_path, class: "btn btn-primary"%></li>  
+          <li><%= link_to 'ユーザ一覧', users_path, class: "btn btn-primary"%></li>
           <li><%= link_to 'プロジェクト作成', new_project_path, class: "btn btn-primary" %></li>
           <li>
             <%= link_to unapprove_performances_path, class: "btn btn-primary" do %>
