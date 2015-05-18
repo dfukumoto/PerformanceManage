@@ -106,19 +106,19 @@ RSpec.describe "Users", type: :request do
   describe "Check Authrority" do
     describe "admin?" do
       before do
-         user.authority = "管理者"
+         user.authority = :admin #"管理者"
       end
       it { should be_admin }
     end
     describe "staff?" do
       before do
-         user.authority = "社員"
+         user.authority =  :staff #"社員"
       end
       it { should be_staff }
     end
     describe "partner?" do
       before do
-         user.authority = "パートナー"
+         user.authority = :partner #"パートナー"
       end
       it { should be_partner }
     end
