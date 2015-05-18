@@ -1,0 +1,7 @@
+ja:
+  enumerize:
+    user:
+      authority:
+        admin: 管理者
+        staff: 社員
+        partner: パートナー

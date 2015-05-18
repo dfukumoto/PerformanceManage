@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :authority, presence: true
 
-  enumerize :authority, in: {"管理者" => 1, "社員" => 2, "パートナー" => 3}, scope: :having_status
+  enumerize :authority, in: {:admin => 1, :staff => 2, :partner => 3}, scope: true #:having_status
 
   has_secure_password
 
